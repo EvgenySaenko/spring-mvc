@@ -18,7 +18,13 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <!--сканируем папку на наличие бинов-->
     <context:component-scan base-package="com.geekbrains.spring_mvc"/>
+
+    <!--сканируем папку на наличие бинов-->
+    <!--prefix означеет когда мы возвращаем имя страницы например "index" в методе с @GetMapping-->
+    <!--мы должны поискать в ресурсах прикрепить слева от index - prefix -/WEB-INF/templates/index-->
+    <!--и справа добавить suffix -/WEB-INF/templates/index.html- вот эту страницу нужно вернуть клиенту-->
 
     <bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
         <property name="prefix" value="/WEB-INF/templates/"/>
@@ -30,6 +36,7 @@
         <property name="templateResolver" ref="templateResolver"/>
     </bean>
 
+    <!--задача ViewResolver понять какую страницу вы хотите получить, чтобы вернуть пользователю -->
     <bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
         <property name="templateEngine" ref="templateEngine"/>
         <property name="characterEncoding" value="UTF-8"/>
