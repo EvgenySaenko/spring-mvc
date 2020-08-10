@@ -1,21 +1,35 @@
 package ru.geekbrains.sample.persistence.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Student extends AbstractEntity {
 
     private String name;
 
-    private Date birth_date;
+    private Date birthDate;
 
     private boolean graduated;
 
@@ -30,12 +44,7 @@ public class Student extends AbstractEntity {
     private List<Subject> subjects;
 
     @OneToOne
-    @JoinColumn(name = "desk")
-    private Desk desk;
-
-
-    @ManyToMany(fetch = FetchType.LAZY)//если ко многим сущностям используем ленивую выборку
-    @JoinTable(name = "student_teacher",joinColumns = @JoinColumn(name = "student"),inverseJoinColumns = @JoinColumn(name = "teacher"))
-    private List<Teacher>teachers;
+    @JoinColumn(name = "passport")
+    private Passport passport;
 
 }
