@@ -2,17 +2,13 @@ package ru.geekbrains.sample.dao;
 
 
 import org.springframework.stereotype.Repository;
-import ru.geekbrains.sample.persistence.entity.Book;
-import ru.geekbrains.sample.persistence.entity.Student;
 import ru.geekbrains.sample.persistence.entity.Teacher;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -30,7 +26,9 @@ public class TeacherRepository {
         CriteriaQuery<Teacher>criteriaQuery = criteriaBuilder.createQuery(Teacher.class);
         //корневая сущность-первая сущность на которую джойнятся другие(когда мы делаем джойны)
         Root<Teacher> root = criteriaQuery.from(Teacher.class);
-        CriteriaQuery<Teacher> all = criteriaQuery.select(root);
-        return entityManager.createQuery(all).getResultList();
+
+        criteriaQuery.select(root);
+        return entityManager.createQuery(criteriaQuery).getResultList();
     }
+
 }

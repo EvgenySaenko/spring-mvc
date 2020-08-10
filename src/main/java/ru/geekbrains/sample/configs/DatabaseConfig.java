@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -19,6 +20,7 @@ import javax.persistence.EntityManagerFactory;
 import java.util.Properties;
 
 @Configuration
+@EnableJpaRepositories(basePackages = "ru.geekbrains.sample.dao")
 @EnableTransactionManagement
 @ComponentScan(basePackages={"ru.geekbrains.sample.dao"})
 public class DatabaseConfig {
@@ -27,7 +29,7 @@ public class DatabaseConfig {
     public DriverManagerDataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/geekbrains");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
         dataSource.setUsername("postgres");
         dataSource.setPassword("postgres");
         return dataSource;
@@ -40,7 +42,8 @@ public class DatabaseConfig {
         jpaTransaction.setEntityManagerFactory(emf);
         return jpaTransaction;
     }
-    @Bean
+
+    @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean getEMF() {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(getDataSource());

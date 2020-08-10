@@ -1,17 +1,17 @@
 package ru.geekbrains.sample.persistence.entity;
 
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.Entity;
 
-@Entity
 @Data
+@Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Teacher extends AbstractEntity{
-
+public class Product extends AbstractEntity {
     private String name;
-
-    private String surname;
+    private Integer cost;
 }

@@ -2,7 +2,6 @@ package ru.geekbrains.sample.configs;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-//инициализирует контекст
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
    @Override
